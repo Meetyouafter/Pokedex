@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import PokemonsServises from '../../../api/pokemons/getPokemons';
+import PokemonsServices from '../../../api/pokemons/getPokemons';
 
 const getAllPokemons = createAsyncThunk(
   'api/v2/all',
   async (thunkAPI) => {
     try {
-      const result = await PokemonsServises.getAllPokemons();
+      const result = await PokemonsServices.getAllPokemons();
 
       return result.data;
     } catch (error) {
