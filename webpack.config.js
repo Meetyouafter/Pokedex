@@ -16,7 +16,7 @@ const optimization = () => {
     },
   };
   if (isProd) {
-    config.minimize = [
+    config.minimizer = [
       new TerserWebpackPlugin(),
       new MiniCssExtractPlugin(),
     ];
