@@ -1,10 +1,8 @@
 import React from "react";
-import Pokemons from "./pokemons/Pokemons.jsx";
+import Pokedex from "./pokedex/Pokedex.jsx";
 
 const App = () => (
-  <div>Hello 2
-  <Pokemons />
-  </div>
+  <Pokedex />
 );
 
 export default App;

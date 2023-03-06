@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const GET_ALL_POKEMONS_URL = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
-const GET_20_POKEMONS_URL = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=20'
+const BASE_URL = 'https://pokeapi.co/api/v2/'
 
-const getAllPokemons = axios.get(GET_ALL_POKEMONS_URL);
-const get20Pokemons = axios.get(GET_20_POKEMONS_URL);
+const getSomePokemons = (data) => axios.get(`${BASE_URL}pokemon?offset=${data.offset}&limit=${data.limit}`);
+const getPokemonData = (pokemonUrl) => axios.get(`${pokemonUrl}`);
+const getPokemonAbility = (name) => axios.get(`${BASE_URL}ability/${name}`);
 
-const PokemonsServises = { getAllPokemons, get20Pokemons };
+const PokemonsServises = { getSomePokemons, getPokemonData, getPokemonAbility };
 
 export default PokemonsServises;
