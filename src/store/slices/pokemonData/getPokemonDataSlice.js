@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit"
-import getPokemonData from "./getPokemonData.js";
+import { createSlice } from '@reduxjs/toolkit';
+import getPokemonData from './getPokemonData';
 
 const initialState = {
   pokemonData: null,
   isLoading: true,
   error: null,
-}
+};
 
 const getPokemonDataSlice = createSlice({
   name: 'pokemonData',
@@ -13,7 +13,7 @@ const getPokemonDataSlice = createSlice({
   extraReducers: {
     [getPokemonData.pending]: (state) => {
       state.pokemonData = null;
-      state.isLoading =true;
+      state.isLoading = true;
       state.error = null;
     },
     [getPokemonData.fulfilled]: (state, action) => {
@@ -26,7 +26,7 @@ const getPokemonDataSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-  }
-})
+  },
+});
 
 export default getPokemonDataSlice.reducer;

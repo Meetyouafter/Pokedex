@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit"
-import getPokemonAbility from "./getPokemonAbility.js";
+import { createSlice } from '@reduxjs/toolkit';
+import getPokemonAbility from './getPokemonAbility';
 
 const initialState = {
   pokemonAbility: null,
   isLoading: true,
   error: null,
-}
+};
 
 const getPokemonAbilitySlice = createSlice({
   name: 'pokemonAbility',
@@ -13,7 +13,7 @@ const getPokemonAbilitySlice = createSlice({
   extraReducers: {
     [getPokemonAbility.pending]: (state) => {
       state.pokemonAbility = null;
-      state.isLoading =true;
+      state.isLoading = true;
       state.error = null;
     },
     [getPokemonAbility.fulfilled]: (state, action) => {
@@ -26,7 +26,7 @@ const getPokemonAbilitySlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-  }
-})
+  },
+});
 
 export default getPokemonAbilitySlice.reducer;

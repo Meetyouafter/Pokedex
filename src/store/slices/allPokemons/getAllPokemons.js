@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import PokemonsServises from '../../../api/pokemons/getPokemons';
 
-const getPokemonData = createAsyncThunk(
-  'api/v2/pokemon',
-  async (data, thunkAPI) => {
+const getAllPokemons = createAsyncThunk(
+  'api/v2/all',
+  async (thunkAPI) => {
     try {
-      const result = await PokemonsServises.getPokemonData(data);
+      const result = await PokemonsServises.getAllPokemons();
 
       return result.data;
     } catch (error) {
@@ -15,4 +15,4 @@ const getPokemonData = createAsyncThunk(
   },
 );
 
-export default getPokemonData;
+export default getAllPokemons;

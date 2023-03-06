@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Grid, Link, Typography, Modal, Box } from "@mui/material";
-import PokeCard from "../pokeCard/pokeCard.jsx";
+import React, { useState } from 'react';
+import {
+  Grid, Typography, Modal, Box,
+} from '@mui/material';
+import PokeCard from '../pokeCard/pokeCard';
 
 const PokemonItem = ({ pokemonData }) => {
   const [open, setOpen] = useState(false);
@@ -20,31 +22,34 @@ const PokemonItem = ({ pokemonData }) => {
   };
 
   return (
-    <Grid item sx={{
-      display: 'flex',
-      border: '1px solid gray',
-      alignItems: 'center',
-      padding: '0px',
-      height: '40px',
-      }}>
-          <div>
-      <Typography onClick={handleOpen}>{pokemonData.name}</Typography>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-          {pokemonData.name}
-          </Typography>
-          <PokeCard pokemonData={pokemonData} />
-        </Box>
-      </Modal>
-    </div>
+    <Grid
+      item
+      sx={{
+        display: 'flex',
+        border: '1px solid gray',
+        alignItems: 'center',
+        padding: '0px',
+        height: '40px',
+      }}
+    >
+      <div>
+        <Typography onClick={handleOpen}>{pokemonData.name}</Typography>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {pokemonData.name}
+            </Typography>
+            <PokeCard pokemonData={pokemonData} />
+          </Box>
+        </Modal>
+      </div>
     </Grid>
-  )
-}
+  );
+};
 
 export default PokemonItem;
