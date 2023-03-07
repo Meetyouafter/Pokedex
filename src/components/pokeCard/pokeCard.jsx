@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import getPokemonData from '../../store/slices/pokemonData/getPokemonData';
 import Loader from '../loader/Loader';
@@ -14,6 +9,8 @@ const PokeCard = ({ pokemonData }) => {
   const { isLoading } = useSelector((state) => state.pokemonData);
   const image = useSelector((state) => state.pokemonData.pokemonData?.sprites?.front_default);
   const stats = useSelector((state) => state.pokemonData?.pokemonData);
+
+  console.log('stats', stats)
 
   useEffect(() => {
     dispatch(getPokemonData(pokemonData.url));

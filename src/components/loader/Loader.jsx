@@ -1,8 +1,10 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
 
 const Loader = () => (
+  <Container>
   <CircularProgress />
+  </Container>
 );
 
 export default Loader;
