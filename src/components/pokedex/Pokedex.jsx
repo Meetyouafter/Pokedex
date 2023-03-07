@@ -11,7 +11,6 @@ import './styles.scss';
 import axios from 'axios';
 import TypeFilter from '../typeFilter/typeFilter';
 import PokemonsServices from '../../api/pokemons/getPokemons';
-import PokemonItem2 from '../pokemon/pokemon2';
 
 const Pokedex = () => {
   const [query, setQuery] = useState('');
@@ -115,7 +114,7 @@ const Pokedex = () => {
               .filter((el) => (types.length
                 ? el.types.every((element) => types.includes(element))
                 : el))
-              .map((el) => <PokemonItem2 key={el.name} pokemonData={el} />)}
+              .map((el) => <PokemonItem key={el.name} pokemonData={el} />)}
           </>
         )
         : (
