@@ -1,44 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Grid, TextField, Typography,
 } from '@mui/material';
-import axios from 'axios';
 import Loader from '../loader/loader';
 import PokemonItem from '../pokemon/pokemon';
-import PokemonsServices from '../../api/pokemons/getPokemons';
 import TypeFilter from '../typeFilter/typeFilter';
+import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons';
 
 const AllPokemons = () => {
   const [query, setQuery] = useState('');
-  const [allPokemons, setAllPokemons] = useState('');
   const [typeForFilter, setTypeForFilter] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
+  const allPokemonsState = useSelector((state) => state.allPokemons);
+  const { isLoading } = allPokemonsState;
+  const { pokemons } = allPokemonsState;
 
   useEffect(() => {
-    PokemonsServices.getAllPokemons()
-      .then((response) => response.data.results)
-      .then((data) => {
-        const requests = data.map((pokemon) => axios.get(pokemon.url));
-        return Promise.all(requests);
-      })
-      .then((responses) => {
-        const newArray = responses.map((el) => {
-          const { name } = el.data;
-          const { types } = el.data;
-          const { weight } = el.data;
-          const { height } = el.data;
-          const { stats } = el.data;
-          const image = el.data.sprites?.front_default;
-          const flatTypes = types.map((type) => type.type.name);
-          return {
-            name, image, types: flatTypes, weight, height, stats,
-          };
-        });
-        setAllPokemons(newArray);
-        setIsLoading(false);
-      });
-  }, []);
+    dispatch(getAllPokemons());
+  }, [dispatch]);
 
   return isLoading ? (
     <Loader />
@@ -81,7 +63,7 @@ const AllPokemons = () => {
           rowGap: '10px',
         }}
       >
-        {allPokemons
+        {pokemons
           .filter((el) => el.name.includes(query))
           .filter((el) => (typeForFilter ? el.types.includes(typeForFilter) : el))
           .map((pokemonStats) => (

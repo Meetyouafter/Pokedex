@@ -1,14 +1,13 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
   Grid, FormControl, MenuItem, Select, InputLabel, Pagination, useMediaQuery,
 } from '@mui/material';
 import Loader from '../loader/loader';
-import getSomePokemons from '../../store/slices/somePokemons/getSomePokemons';
 import PokemonItem from '../pokemon/pokemon';
+import PokemonsServices from '../../api/pokemons/getPokemons';
 
 const PokedexPagination = () => {
   const [pokeQuantity, setPokeQuantity] = useState(10);
@@ -17,17 +16,16 @@ const PokedexPagination = () => {
   const [pokemons, setPokemons] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const dispatch = useDispatch();
   const point500px = useMediaQuery('(min-width:500px)');
 
   useEffect(() => {
-    dispatch(getSomePokemons({
+    PokemonsServices.getSomePokemons({
       offset: (page - 1) * pokeQuantity,
       limit: pokeQuantity,
-    }))
+    })
       .then((response) => {
-        setPagesQuantity(Math.ceil(response?.payload?.count / pokeQuantity));
-        return response.payload.results;
+        setPagesQuantity(Math.ceil(response?.data?.count / pokeQuantity));
+        return response.data.results;
       })
       .then((data) => {
         const requests = data.map((pokemon) => axios.get(pokemon.url));
@@ -49,7 +47,7 @@ const PokedexPagination = () => {
         setPokemons(newArray);
         setIsLoading(false);
       });
-  }, [dispatch, pokeQuantity, page]);
+  }, [pokeQuantity, page]);
 
   return isLoading ? (
     <Loader />
