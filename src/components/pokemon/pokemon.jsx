@@ -2,14 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
-  Card, CardActions, CardContent, CardMedia, Typography,
+  Card, CardActions, CardContent, CardMedia, Typography, useMediaQuery,
 } from '@mui/material';
-import Loader from '../loader/Loader';
+import Loader from '../loader/loader';
 import ModalWindow from '../modalWindow/modalWindow';
 
 const PokemonItem = ({ url }) => {
   const [pokemonStats, setPokemonStats] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const point500px = useMediaQuery('(min-width:500px)');
 
   useEffect(() => {
     axios.get(`${url}`)
@@ -30,13 +32,17 @@ const PokemonItem = ({ url }) => {
   return (
     isLoading ? <Loader />
       : (
-        <Card sx={{ minWidth: 165, width: '31%', border: '1px solid gray' }}>
+        <Card sx={{
+          minWidth: 165, minHeight: '450px', width: point500px ? '20%' : '31%', border: '1px solid gray',
+        }}
+        >
           <CardMedia
             component="img"
             image={pokemonStats.image}
             title={pokemonStats.name}
+            sx={{ width: '163px', height: '163px' }}
           />
-          <CardContent>
+          <CardContent sx={{ winHeight: '230px' }}>
             <Typography gutterBottom variant="h5" component="div" sx={{ textAlign: 'center' }}>
               {pokemonStats.name}
             </Typography>
@@ -59,9 +65,9 @@ const PokemonItem = ({ url }) => {
               Types:
               {' '}
             </Typography>
-            {pokemonStats.types.map((el) => (
+            {pokemonStats.types.map((type) => (
               <Typography
-                key={el}
+                key={type}
                 sx={{
                   display: 'inline-block',
                   backgroundColor: 'turquoise',
@@ -71,8 +77,7 @@ const PokemonItem = ({ url }) => {
                   marginRight: '5px',
                 }}
               >
-                {el}
-
+                {type}
               </Typography>
             ))}
           </CardContent>

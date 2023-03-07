@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Grid, FormControl, MenuItem, Select, InputLabel, Pagination, useMediaQuery,
 } from '@mui/material';
-import Loader from '../loader/Loader';
+import Loader from '../loader/loader';
 import getSomePokemons from '../../store/slices/somePokemons/getSomePokemons';
 import PokemonItem from '../pokemon/pokemon';
 
@@ -59,7 +59,7 @@ const PokedexPagination = () => {
           siblingCount={0}
           showFirstButton={!!point500px}
           showLastButton={!!point500px}
-          sx={{ pt: '10px', pb: '10px', justifyContent: 'center' }}
+          sx={{ pt: '10px', pb: '10px' }}
         />
       </Grid>
       <Grid

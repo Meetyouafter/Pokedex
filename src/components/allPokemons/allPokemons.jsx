@@ -7,7 +7,7 @@ import Loader from '../loader/loader';
 import PokemonItem from '../pokemon/pokemon';
 import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons';
 
-const Pokedex = () => {
+const AllPokemons = () => {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -59,4 +59,4 @@ const Pokedex = () => {
   );
 };
 
-export default Pokedex;
+export default AllPokemons;
