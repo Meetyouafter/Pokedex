@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-const ModalWindow = ({ stats }) => {
+const ModalWindow = ({ image, stats }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -32,6 +32,7 @@ const ModalWindow = ({ stats }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          {image && <image src={image} />}
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Pokemon stats
           </Typography>

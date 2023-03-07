@@ -1,6 +1,8 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import {
   Grid, FormControl, MenuItem, Select, InputLabel, Pagination, useMediaQuery,
 } from '@mui/material';
@@ -12,13 +14,11 @@ const PokedexPagination = () => {
   const [pokeQuantity, setPokeQuantity] = useState(10);
   const [page, setPage] = useState(1);
   const [pagesQuantity, setPagesQuantity] = useState(0);
+  const [pokemons, setPokemons] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
   const point500px = useMediaQuery('(min-width:500px)');
-
-  const pokemonsState = useSelector((state) => state.pokemons);
-  const { isLoading } = pokemonsState;
-  const pokemons = pokemonsState.pokemons?.results;
 
   useEffect(() => {
     dispatch(getSomePokemons({
@@ -27,6 +27,27 @@ const PokedexPagination = () => {
     }))
       .then((response) => {
         setPagesQuantity(Math.ceil(response?.payload?.count / pokeQuantity));
+        return response.payload.results;
+      })
+      .then((data) => {
+        const requests = data.map((pokemon) => axios.get(pokemon.url));
+        return Promise.all(requests);
+      })
+      .then((responses) => {
+        const newArray = responses.map((el) => {
+          const { name } = el.data;
+          const { types } = el.data;
+          const { weight } = el.data;
+          const { height } = el.data;
+          const { stats } = el.data;
+          const image = el.data.sprites?.front_default;
+          const flatTypes = types.map((type) => type.type.name);
+          return {
+            name, image, types: flatTypes, weight, height, stats,
+          };
+        });
+        setPokemons(newArray);
+        setIsLoading(false);
       });
   }, [dispatch, pokeQuantity, page]);
 
@@ -34,6 +55,10 @@ const PokedexPagination = () => {
     <Loader />
   ) : (
     <Grid container sx={{ padding: '5% 10%', flexDirection: 'column' }}>
+      <Grid item>
+        <Link to="/" style={{ paddingBottom: '15px', display: 'inline-block', paddingRight: '20px' }}>See all pokemons with filter and pagination</Link>
+        <Link to="/pokemons" style={{ paddingBottom: '15px', display: 'inline-block' }}>See all pokemons with filter</Link>
+      </Grid>
       <Grid item sx={{ width: point500px ? '20%' : '100%' }}>
         <FormControl fullWidth>
           <InputLabel id="select-label">On page</InputLabel>
@@ -77,7 +102,12 @@ const PokedexPagination = () => {
         }}
       >
         {pokemons
-          .map((el) => <PokemonItem key={el.name} url={el.url} />)}
+          .map((pokemonStats) => (
+            <PokemonItem
+              key={pokemonStats.name}
+              pokemonStats={pokemonStats}
+            />
+          ))}
       </Grid>
     </Grid>
   );
