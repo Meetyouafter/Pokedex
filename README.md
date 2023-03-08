@@ -15,4 +15,4 @@ You can look pokemons on pages with 10/20/50 items of each, or you can find your
  - React, Redux, React-Router, MUI, SCSS, Webpack;
  - API from https://pokeapi.co;
 
-#### You can look at this app on the https://pokedex-nine-delta.vercel.app/
+#### You can look at this app on the https://pokedex-app-git-main-meetyouafter.vercel.app/
