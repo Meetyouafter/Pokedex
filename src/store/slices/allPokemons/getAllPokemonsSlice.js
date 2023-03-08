@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getAllPokemons from './getAllPokemons.js';
+import getAllPokemons from './getAllPokemons';
 
 const initialState = {
   pokemons: null,

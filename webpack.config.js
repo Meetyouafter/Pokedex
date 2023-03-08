@@ -56,6 +56,9 @@ module.exports = {
       filename: filename('css'),
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {

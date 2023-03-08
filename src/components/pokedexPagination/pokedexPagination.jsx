@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import {
   Grid, FormControl, MenuItem, Select, InputLabel, Pagination, useMediaQuery,
 } from '@mui/material';
-import Loader from '../loader/loader.jsx';
-import PokemonItem from '../pokemon/pokemon.jsx';
-import PokemonsServices from '../../api/pokemons/getPokemons.js';
-import Error from '../error/error.jsx';
+import Loader from '../loader/loader';
+import PokemonItem from '../pokemon/pokemon';
+import PokemonsServices from '../../api/pokemons/getPokemons';
+import Error from '../error/error';
 
 const PokedexPagination = () => {
   const [pokeQuantity, setPokeQuantity] = useState(10);

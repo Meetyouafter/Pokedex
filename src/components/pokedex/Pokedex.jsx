@@ -6,12 +6,12 @@ import {
   Grid, TextField, FormControl, MenuItem, Select, InputLabel, Pagination, Typography, useMediaQuery,
 } from '@mui/material';
 import axios from 'axios';
-import Loader from '../loader/loader.jsx';
-import PokemonItem from '../pokemon/pokemon.jsx';
-import Error from '../error/error.jsx';
-import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons.js';
-import TypeFilter from '../typeFilter/typeFilter.jsx';
-import PokemonsServices from '../../api/pokemons/getPokemons.js';
+import Loader from '../loader/loader';
+import PokemonItem from '../pokemon/pokemon';
+import Error from '../error/error';
+import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons';
+import TypeFilter from '../typeFilter/typeFilter';
+import PokemonsServices from '../../api/pokemons/getPokemons';
 
 const Pokedex = () => {
   const [query, setQuery] = useState('');
