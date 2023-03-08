@@ -5,6 +5,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
+const PORT = process.env.PORT || 8080;
 
 const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
@@ -38,9 +39,13 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
     hot: isDev,
     host: '0.0.0.0',
-    port: 8080,
+    port: PORT,
     open: true,
     historyApiFallback: true,
   },
