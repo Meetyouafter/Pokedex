@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import PokemonsServices from '../../../api/pokemons/getPokemons';
+import PokemonsServices from '../../../api/pokemons/getPokemons.js';
 
 const getAllPokemons = createAsyncThunk(
   'api/v2/all',

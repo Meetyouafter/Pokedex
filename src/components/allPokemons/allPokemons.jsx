@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Grid, TextField, Typography,
 } from '@mui/material';
-import Loader from '../loader/loader';
-import PokemonItem from '../pokemon/pokemon';
-import Error from '../error/error';
-import TypeFilter from '../typeFilter/typeFilter';
-import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons';
+import Loader from '../loader/loader.jsx';
+import PokemonItem from '../pokemon/pokemon.jsx';
+import Error from '../error/error.jsx';
+import TypeFilter from '../typeFilter/typeFilter.jsx';
+import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons.js';
 
 const AllPokemons = () => {
   const [query, setQuery] = useState('');
