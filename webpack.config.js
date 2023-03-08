@@ -38,8 +38,12 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
-    static: './dist',
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     hot: isDev,
+    inline: true,
+    host: '0.0.0.0',
     port: 8080,
     open: true,
     historyApiFallback: true,
