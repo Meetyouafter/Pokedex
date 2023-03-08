@@ -6,6 +6,7 @@ import {
 } from '@mui/material';
 import Loader from '../loader/loader';
 import PokemonItem from '../pokemon/pokemon';
+import Error from '../error/error';
 import TypeFilter from '../typeFilter/typeFilter';
 import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons';
 
@@ -17,14 +18,21 @@ const AllPokemons = () => {
   const allPokemonsState = useSelector((state) => state.allPokemons);
   const { isLoading } = allPokemonsState;
   const { pokemons } = allPokemonsState;
+  const { error } = allPokemonsState;
 
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  if (error) {
+    return <Error error={error} />;
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
     <Grid container sx={{ padding: '5% 10%', flexDirection: 'column', overflow: 'auto' }}>
       <Grid item>
         <Link to="/" style={{ paddingBottom: '15px', display: 'inline-block', paddingRight: '20px' }}>See all pokemons with filter and pagination</Link>

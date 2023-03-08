@@ -27,6 +27,7 @@ const getAllPokemons = createAsyncThunk(
       return result;
     } catch (error) {
       const message = error.response.data;
+
       return thunkAPI.rejectWithValue(message);
     }
   },

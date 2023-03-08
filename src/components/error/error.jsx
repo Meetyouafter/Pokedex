@@ -2,9 +2,9 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const Error = () => {
+const Error = ({ error }) => {
   const navigate = useNavigate();
-  setTimeout(() => navigate('/'), 2000);
+  if (!error) setTimeout(() => navigate('/'), 2000);
 
   return (
     <Box
@@ -17,7 +17,7 @@ const Error = () => {
       }}
     >
       <Typography variant="h2" sx={{ textAlign: 'center' }}>
-        Sorry. This page does not exist
+        {error ? `${error}` : 'Sorry. This page does not exist'}
       </Typography>
     </Box>
 

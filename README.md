@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/94cd39692f5ec677466c/maintainability)](https://codeclimate.com/github/Meetyouafter/test_EclipseDigitalStudio/maintainability)
+
 ### Welcome to Pokedex!
 
 This is app with all pokemons from once of famous movies.

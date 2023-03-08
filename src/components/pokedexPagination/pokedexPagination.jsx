@@ -8,6 +8,7 @@ import {
 import Loader from '../loader/loader';
 import PokemonItem from '../pokemon/pokemon';
 import PokemonsServices from '../../api/pokemons/getPokemons';
+import Error from '../error/error';
 
 const PokedexPagination = () => {
   const [pokeQuantity, setPokeQuantity] = useState(10);
@@ -15,6 +16,7 @@ const PokedexPagination = () => {
   const [pagesQuantity, setPagesQuantity] = useState(0);
   const [pokemons, setPokemons] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [pageError, setPageError] = useState(null);
 
   const point500px = useMediaQuery('(min-width:500px)');
 
@@ -46,12 +48,25 @@ const PokedexPagination = () => {
         });
         setPokemons(newArray);
         setIsLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setPageError(`Something went wrong. Error is ${error.response.data}`);
+        } else {
+          setPageError('Something went wrong. Check your connection and try again.');
+        }
       });
   }, [pokeQuantity, page]);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  if (pageError) {
+    return <Error error={pageError} />;
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
     <Grid container sx={{ padding: '5% 10%', flexDirection: 'column' }}>
       <Grid item>
         <Link to="/" style={{ paddingBottom: '15px', display: 'inline-block', paddingRight: '20px' }}>See all pokemons with filter and pagination</Link>

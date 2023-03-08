@@ -8,6 +8,7 @@ import {
 import axios from 'axios';
 import Loader from '../loader/loader';
 import PokemonItem from '../pokemon/pokemon';
+import Error from '../error/error';
 import getAllPokemons from '../../store/slices/allPokemons/getAllPokemons';
 import TypeFilter from '../typeFilter/typeFilter';
 import PokemonsServices from '../../api/pokemons/getPokemons';
@@ -19,6 +20,7 @@ const Pokedex = () => {
   const [pagesQuantity, setPagesQuantity] = useState(0);
   const [typeForFilter, setTypeForFilter] = useState('');
   const [pokemons, setPokemons] = useState('');
+  const [pageError, setPageError] = useState(null);
 
   const point500px = useMediaQuery('(min-width:500px)');
   const dispatch = useDispatch();
@@ -37,8 +39,8 @@ const Pokedex = () => {
       limit: pokeQuantity,
     })
       .then((response) => {
-        setPagesQuantity(Math.ceil(response?.payload?.count / pokeQuantity));
-        return response.payload.results;
+        setPagesQuantity(Math.ceil(response?.data?.count / pokeQuantity));
+        return response.data.results;
       })
       .then((data) => {
         const requests = data.map((pokemon) => axios.get(pokemon.url));
@@ -58,12 +60,25 @@ const Pokedex = () => {
           };
         });
         setPokemons(newArray);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setPageError(`Something went wrong. Error is ${error.response.data}`);
+        } else {
+          setPageError('Something went wrong. Check your connection and try again.');
+        }
       });
   }, [dispatch, pokeQuantity, page]);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  if (pageError) {
+    return <Error error={pageError} />;
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
     <Grid container sx={{ padding: '2% 5%', flexDirection: 'column' }}>
       <Grid item>
         <Link to="/pokemons" style={{ paddingBottom: '15px', display: 'inline-block', paddingRight: '20px' }}>See all pokemons with filter</Link>
