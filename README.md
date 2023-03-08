@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/94cd39692f5ec677466c/maintainability)](https://codeclimate.com/github/Meetyouafter/test_EclipseDigitalStudio/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ce346511c1592a9275df/maintainability)](https://codeclimate.com/github/Meetyouafter/Educational-game/maintainability)
 
 ### Welcome to Pokedex!
 
