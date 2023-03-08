@@ -17,7 +17,7 @@ const PokemonItem = ({ pokemonStats }) => {
         component="img"
         image={pokemonStats.image}
         title={pokemonStats.name}
-        sx={{ width: '163px', height: '163px' }}
+        sx={{ minWidth: '163px', minHeight: '163px' }}
       />
       <CardContent sx={{ winHeight: '230px' }}>
         <Typography gutterBottom variant="h5" component="div" sx={{ textAlign: 'center' }}>
