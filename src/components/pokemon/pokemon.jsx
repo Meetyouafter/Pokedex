@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Card, CardActions, CardContent, CardMedia, Typography, useMediaQuery,
 } from '@mui/material';
-import ModalWindow from '../modalWindow/modalWindow';
+import ModalWindow from '../modalWindow/modalWindow.jsx';
 
 const PokemonItem = ({ pokemonStats }) => {
   const point500px = useMediaQuery('(min-width:500px)');
