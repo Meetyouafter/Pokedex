@@ -38,9 +38,8 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/assets/',
     hot: isDev,
     host: '0.0.0.0',
     port: 8080,
