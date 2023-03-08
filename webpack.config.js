@@ -42,7 +42,6 @@ module.exports = {
       directory: path.join(__dirname, 'dist'),
     },
     hot: isDev,
-    inline: true,
     host: '0.0.0.0',
     port: 8080,
     open: true,
