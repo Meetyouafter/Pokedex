@@ -39,9 +39,7 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
+    contentBase: './dist/',
     compress: true,
     hot: isDev,
     host: '0.0.0.0',
